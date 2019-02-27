@@ -1,0 +1,7 @@
+{
+  "name": "sincronizacionDatos",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
