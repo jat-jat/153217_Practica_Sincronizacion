@@ -1,12 +1,53 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color='primary'>
     <ion-title>
-      Ionic Blank
+      Registro de ciudadanos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
+  <form [formGroup]='formRegistro'>
+    <ion-item>
+      <ion-label color='tertiary' position='floating'>Nombre completo</ion-label>
+      <ion-input type='text' formControlName='nombre'></ion-input>
+      <span *ngIf="formRegistro.get('nombre').touched && formRegistro.get('nombre').invalid">Inválido</span>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label color='tertiary' position='floating'>Edad</ion-label>
+      <ion-input type='number' formControlName='edad'></ion-input>
+      <span *ngIf="formRegistro.get('edad').touched && formRegistro.get('edad').invalid">Inválido</span>
+    </ion-item>
+
+    <ion-list>
+      <ion-radio-group formControlName='sexo'>
+        <ion-list-header style='color: #633ce0;'>Sexo</ion-list-header>
+        <ion-item> <ion-label>Hombre</ion-label> <ion-radio value="H"></ion-radio> </ion-item>
+        <ion-item> <ion-label>Mujer</ion-label> <ion-radio value="M"></ion-radio> </ion-item>
+      </ion-radio-group>
+    </ion-list>
+
+    <ion-item>
+      <ion-label color='tertiary'>Ocupación</ion-label>
+      <ion-select formControlName='ocupacion' placeholder="Elija">
+        <ion-select-option *ngFor="let ocup of ocupaciones" [value]='ocup'>{{ocup}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color='tertiary'>Ciudad</ion-label>
+        <ion-select formControlName='ciudad' placeholder="Elija">
+          <ion-select-option *ngFor="let ciu of ciudades" [value]='ciu'>{{ciu}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-button type='button' expand='full' (click)='guardarFormulario()' [disabled]='formRegistro.invalid'>Guardar</ion-button>
+  </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar color='tertiary' style='text-align: center; font-style: italic;'>
+    Sincronización de datos - 153217 - IDS 8° - UP Chiapas
+  </ion-toolbar>
+</ion-footer>
